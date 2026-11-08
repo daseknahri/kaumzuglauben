@@ -1,0 +1,189 @@
+/* ===== Fonts (self-hosted) ===== */
+@font-face{font-family:"Literata";src:url("__THEME__/assets/fonts/literata-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Literata";src:url("__THEME__/assets/fonts/literata-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Literata";src:url("__THEME__/assets/fonts/literata-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Literata";src:url("__THEME__/assets/fonts/literata-italic-400.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Anton";src:url("__THEME__/assets/fonts/Anton-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+
+/* ===== Brand tokens (the parent theme is fully token-driven) ===== */
+:root{
+  /* KaumZuGlauben — BRAND.md palette: tabloid-facts energy. Warm paper, near-black ink,
+     shock-red primary, amber accent. Strong Anton display headlines over Literata reading text.
+     Where a brand hex is too light for text on paper, a darker derivative is used and noted. */
+  --paper:#FFF9EE; --paper-soft:#F7EBD3; --surface:#FFFDF8;
+  --ink:#14161A; --muted:#5C5648;
+  --olive:#D92B2B; --olive-dark:#A81D1D; --copper:#B97E04; --clay:#93510A; --sage:#F7EBD3;
+  --gold:#F5B301; --spoiler:#D92B2B;
+  --eyebrow:#C22424; --line:#EADFC6; --ad-label:#8A7A63;
+  --footer:#14161A; --footer-ink:rgba(255,249,238,.88); --footer-hover:#F5B301;
+  --hero-bg:#14161A; --hero-eyebrow:#F5B301; --hero-rule:#D92B2B; --on-dark:#FFF9EE;
+  --serif:"Literata",Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --display:"Anton","Arial Narrow",Impact,sans-serif;
+  --measure:680px;
+  /* Category colours, one per pillar (fixed slugs set by the seed) */
+  --mood-geschichte:#9C3D1E; --mood-natur:#2F7D3B; --mood-mensch:#1F6FA8; --mood-alltag:#B97E04; --mood-rekorde:#D92B2B;
+}
+
+/* Night reading: follows the phone's dark mode (many readers scroll FB in bed). */
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#101114; --paper-soft:#1B1D22; --surface:#22242A;
+    --ink:#FFF6E5; --muted:#C9BFA9; --olive:#FF5A4E; --olive-dark:#FF8A7A; --copper:#F5B301; --clay:#E0A266;
+    --sage:#1B1D22; --eyebrow:#FF8A7A; --line:rgba(255,246,229,.14); --ad-label:#C9BFA9;
+    color-scheme:dark;
+  }
+}
+
+/* ===== Display type: Anton headlines (BRAND.md) — condensed, loud, tabloid-facts.
+   Cards, hero, tiles and the brand name shout in caps; the article H1 keeps sentence
+   case so long German headlines stay readable. ===== */
+.entry-title,.post-card__title,.home-hero__title,.topic-tile__title,.site-brand__name{
+  font-family:var(--display);font-weight:400;letter-spacing:.015em;
+}
+.post-card__title,.home-hero__title,.topic-tile__title,.site-brand__name{text-transform:uppercase}
+
+/* ===== Reading column ===== */
+body{font-family:var(--serif)}
+.entry-content{font-size:clamp(1.1rem,1rem + .45vw,1.24rem);line-height:1.78;letter-spacing:.002em}
+.entry-content p{margin:0 0 1.05em}
+.entry-content > p:first-of-type::first-letter{float:left;font-size:3.6em;line-height:.82;font-weight:700;margin:.06em .1em 0 0;color:var(--olive)}
+.entry-title{font-size:clamp(1.9rem,1.45rem + 2.2vw,2.8rem);line-height:1.12}
+.entry-excerpt{font-style:italic;color:var(--muted);font-size:1.12rem}
+.vr-breadcrumbs,.entry-tags,.entry-header .share-tools{display:none}
+.content-layout--single-post>*{min-width:0}
+.entry{max-width:100%}
+.entry img,.entry iframe,.entry video,.entry figure{max-width:100%}
+.entry-title,.entry-content{overflow-wrap:break-word}
+.entry-byline__meta,.content-chip,.eyebrow,.vr-btn,.site-nav,.post-card__meta,.topic-tile__count{font-family:var(--sans)}
+.entry-featured-media img{border-radius:14px}
+
+/* Reading progress bar in shock red */
+.vr-progress{background:var(--olive);height:3px}
+
+/* Fakt badge — the one place the red shouts */
+.kz-fakt-badge{display:inline-block;font:700 .72rem/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--spoiler);border-radius:999px;padding:.45em .8em}
+
+/* Category-coloured chips */
+.content-chip,.topic-tile{--mood:var(--olive)}
+.cat-geschichte-ereignisse,.category-geschichte-ereignisse{--mood:var(--mood-geschichte)}
+.cat-natur-tiere,.category-natur-tiere{--mood:var(--mood-natur)}
+.cat-mensch-koerper,.category-mensch-koerper{--mood:var(--mood-mensch)}
+.cat-alltag-mythen,.category-alltag-mythen{--mood:var(--mood-alltag)}
+.cat-rekorde-kurioses,.category-rekorde-kurioses{--mood:var(--mood-rekorde)}
+.post-card .content-chip{background:color-mix(in srgb,var(--mood) 12%,transparent);color:var(--mood);border-radius:999px;padding:.2em .7em;font-weight:600;font-size:.78rem}
+
+/* Cards: bigger, tappable, title-first for scrolling thumbs */
+.post-card{border-radius:16px;overflow:hidden}
+.post-card__title{font-size:1.22rem;line-height:1.25}
+.post-card__media img{aspect-ratio:4/3;object-fit:cover}
+
+/* ===== End of article ===== */
+.kz-end{margin:2.4rem 0 1rem;padding:1.5rem 1.4rem;border-radius:18px;background:var(--paper-soft);border:1px solid var(--line);text-align:center;font-family:var(--sans)}
+.kz-end__mark{display:block;width:44px;height:44px;margin:0 auto .6rem;border-radius:50%}
+.kz-end__q{font-family:var(--serif);font-size:1.25rem;font-style:italic;line-height:1.4;margin:0 0 1rem;color:var(--ink)}
+.kz-end__actions{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center}
+.kz-btn{display:inline-flex;align-items:center;gap:.45rem;border-radius:999px;padding:.75rem 1.2rem;font-weight:600;font-size:.98rem;text-decoration:none;border:0;cursor:pointer}
+.kz-btn--fb{background:#1877F2;color:#fff}
+.kz-btn--wa{background:#25D366;color:#073B1A}
+.kz-btn--more{background:var(--olive);color:#fff}
+.kz-btn:hover{filter:brightness(1.06);text-decoration:none;color:inherit}
+.kz-btn svg{width:18px;height:18px}
+.kz-share{position:relative;display:inline-flex}
+.kz-share__pop{position:absolute;bottom:calc(100% + 10px);right:0;z-index:70;display:none;flex-direction:column;gap:2px;min-width:190px;padding:.5rem;border-radius:14px;background:var(--surface);border:1px solid var(--line);box-shadow:0 14px 40px rgba(0,0,0,.22);text-align:left}
+.kz-share.is-open .kz-share__pop{display:flex}
+.kz-share__pop a,.kz-share__pop button{display:flex;align-items:center;gap:.6rem;padding:.55rem .7rem;border-radius:10px;font:600 .92rem/1 var(--sans);color:var(--ink);text-decoration:none;background:none;border:0;cursor:pointer;text-align:left;width:100%}
+.kz-share__pop a:hover,.kz-share__pop button:hover{background:var(--paper-soft);text-decoration:none;color:var(--ink)}
+
+.kz-next{display:grid;grid-template-columns:120px 1fr;gap:1rem;align-items:center;margin:1.6rem 0;padding:1rem;border-radius:18px;background:var(--surface);box-shadow:var(--shadow);text-decoration:none;color:var(--ink)}
+.kz-next:hover{box-shadow:var(--shadow-lift);text-decoration:none;color:var(--ink)}
+.kz-next img{width:120px;height:120px;object-fit:cover;border-radius:12px}
+.kz-next__eyebrow{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--olive)}
+.kz-next__title{display:block;font-size:1.2rem;line-height:1.3;font-weight:600;margin-top:.25rem;font-family:var(--serif)}
+
+/* Sticky "next article" bar — ALWAYS dark (fixed colours; must not invert in dark mode). */
+.kz-bar{position:fixed;left:12px;right:12px;bottom:calc(12px + var(--kz-anchor,0px));z-index:60;display:flex;align-items:center;gap:.7rem;padding:.6rem .7rem;border-radius:16px;background:#14161A;color:#FFF9EE;box-shadow:0 14px 40px rgba(0,0,0,.28);font-family:var(--sans);text-decoration:none;transform:translateY(140%);transition:transform .35s ease}
+.kz-bar.is-on{transform:none}
+.kz-bar img{width:48px;height:48px;border-radius:10px;object-fit:cover;flex:none}
+.kz-bar__t{font-size:.86rem;line-height:1.25;flex:1;min-width:0}
+.kz-bar__t b{display:block;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:#F5B301}
+.kz-bar__t span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#FFF9EE}
+.kz-bar__go{flex:none;width:36px;height:36px;border-radius:50%;background:#D92B2B;display:grid;place-items:center;color:#fff}
+.kz-bar__x{flex:none;background:none;border:0;color:#E8B4B0;font-size:1.3rem;line-height:1;padding:.2rem .3rem;cursor:pointer}
+@media (min-width:900px){.kz-bar{left:auto;right:24px;bottom:24px;width:360px}}
+@media (prefers-reduced-motion:reduce){.kz-bar{transition:none}}
+
+/* Disclaimer line under every article */
+.kz-note{font-family:var(--sans);font-size:.8rem;color:var(--muted);text-align:center;margin:.4rem 0 0}
+.kz-follow{font-family:var(--sans);font-size:.88rem;color:var(--muted);text-align:center;margin:1rem 0 0}
+.kz-follow a{color:var(--olive);font-weight:600}
+
+/* Ads: in-feed slot spans the whole card row; header strip gets breathing room on phones */
+.kz-feed-ad{grid-column:1/-1;min-width:0;margin:.4rem 0}
+.kz-feed-ad .wpap-ad{margin:0 auto;max-width:728px}
+.vr-ad-strip{margin-top:.6rem}
+.kz-top .vr-ad-strip__inner{position:relative;overflow:hidden;display:block}
+.kz-top--m .vr-ad-strip__inner{width:100%;height:300px;min-height:300px;padding:12px 0}
+.kz-top--d .vr-ad-strip__inner{height:140px;min-height:140px}
+.vr-ad-strip.kz-top:has(ins.adsbygoogle[data-ad-status="unfilled"]){display:block}
+.kz-top-fb{display:none;position:absolute;inset:12px;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;padding:14px 18px;text-align:center;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.kz-top-fb:hover{text-decoration:none;color:var(--ink)}
+.kz-top-fb span{font:700 .64rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--eyebrow)}
+.kz-top-fb strong{font-family:var(--serif);font-size:1.18rem;line-height:1.3;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.kz-top-fb em{font:600 .95rem/1 var(--sans);font-style:normal;color:var(--olive)}
+.kz-top--d .kz-top-fb{flex-direction:row;gap:1rem;padding:8px 18px}
+.kz-top--d .kz-top-fb strong{-webkit-line-clamp:2;font-size:1.05rem}
+.kz-top:has(ins.adsbygoogle[data-ad-status="unfilled"]) .kz-top-fb{display:flex}
+.kz-top:not(:has(ins.adsbygoogle[data-ad-status])) .kz-top-fb{display:flex;visibility:hidden;animation:kz-fb-in 0s linear 4s forwards}
+@keyframes kz-fb-in{to{visibility:visible}}
+.entry-content .wpap-ad-incontent .adsbygoogle,.entry-content .wpap-ad-repeat .adsbygoogle{min-height:250px}
+.sidebar__block .wpap-ad{min-height:292px}
+@media (min-width:900px){
+  .entry-content .wpap-ad-repeat{display:none}
+}
+@media (max-width:899px){
+  .sidebar .widget_search,.sidebar .search-form{display:none}
+}
+
+/* Phone reading comfort */
+@media (max-width:600px){
+  .vr-container{width:calc(100vw - 28px)}
+  .entry-title{font-size:1.85rem;line-height:1.15}
+  .entry-content{font-size:1.125rem;line-height:1.75}
+  .entry-content > p:first-of-type::first-letter{font-size:3.1em}
+  .entry-excerpt{font-size:1.02rem}
+  .entry-featured-media img{border-radius:12px}
+  .kz-end{padding:1.2rem 1rem;margin-top:1.8rem}
+  .kz-end__actions{flex-direction:column}
+  .kz-btn{justify-content:center;width:100%;padding:.9rem 1rem;font-size:1.02rem}
+  .kz-next{grid-template-columns:88px 1fr;gap:.8rem;padding:.8rem}
+  .kz-next img{width:88px;height:88px}
+  .kz-next__title{font-size:1.05rem}
+  .post-card__title{font-size:1.14rem}
+}
+
+/* ===== KaumZuGlauben brand layer ===== */
+/* Home hero: the red exclamation-mark scene on near-black; an ink veil darkens only the
+   text side. Fixed image box = no layout shift. */
+.home-hero::after{background:linear-gradient(94deg,rgba(16,17,20,.93),rgba(16,17,20,.7) 48%,rgba(16,17,20,.06) 82%),linear-gradient(0deg,var(--paper),transparent 30%)}
+.home-hero__img{object-position:50% center}
+@media (max-width:700px){
+  .home-hero::after{background:linear-gradient(180deg,rgba(16,17,20,.88),rgba(16,17,20,.74) 60%,rgba(16,17,20,.32)),linear-gradient(0deg,var(--paper),transparent 25%)}
+}
+.home-hero .vr-btn{background:#D92B2B;color:#FFF9EE}
+.home-hero .vr-btn:hover{background:#A81D1D;color:#FFF9EE}
+
+/* Home intro strip */
+.kz-intro{margin:.9rem 0 0}
+.kz-intro__in{display:flex;align-items:center;gap:.9rem;padding:.8rem 1rem;border-radius:16px;background:var(--paper-soft);border:1px solid var(--line)}
+.kz-intro__img{flex:none;width:64px;height:64px;border-radius:50%;border:3px solid var(--olive);object-fit:cover;background:#F7EBD3}
+.kz-intro__t{min-width:0}
+.kz-intro__h{margin:0;font-family:var(--serif);font-weight:700;font-size:1.08rem;line-height:1.25;color:var(--olive)}
+.kz-intro__s{margin:.2rem 0 0;font-family:var(--sans);font-size:.92rem;line-height:1.4;color:var(--muted)}
+.kz-intro__s a{color:var(--olive);font-weight:600}
+@media (max-width:600px){.kz-intro__img{width:52px;height:52px}.kz-intro__h{font-size:1rem}.kz-intro__s{font-size:.86rem}}
+
+.author-box__avatar,.entry-byline__avatar{border-radius:50%;object-fit:cover}
+
+/* Ad label (parent theme falls back to its own wording when translations are not loaded). */
+:root{--vr-ad-label:"Werbung"}
